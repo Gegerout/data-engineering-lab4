@@ -1,0 +1,20 @@
+$ sleep 10
+$ docker compose ps --format '{{.Name}} {{.Image}} {{.Status}} {{.Ports}}'
+zk1 zookeeper:3.9.6-jre-17 Up 10 seconds 127.0.0.1:2181->2181/tcp
+zk2 zookeeper:3.9.6-jre-17 Up 10 seconds 127.0.0.1:2182->2182/tcp
+zk3 zookeeper:3.9.6-jre-17 Up 10 seconds 127.0.0.1:2183->2183/tcp
+$ docker exec zk1 zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /conf/zoo.cfg
+Client port found: 2181. Client address: localhost. Client SSL: false.
+Mode: follower
+$ docker exec zk2 zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /conf/zoo.cfg
+Client port found: 2182. Client address: localhost. Client SSL: false.
+Mode: follower
+$ docker exec zk3 zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /conf/zoo.cfg
+Client port found: 2183. Client address: localhost. Client SSL: false.
+Mode: leader

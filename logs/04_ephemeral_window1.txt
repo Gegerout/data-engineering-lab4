@@ -1,0 +1,48 @@
+$ sleep 5
+$ docker exec zk1 zkCli.sh -server zk1:2181 get -s /lab4-ephemeral
+Connecting to zk1:2181
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null zxid: -1
+window2
+cZxid = 0x300000003
+ctime = Tue Nov 10 10:56:07 UTC 2026
+mZxid = 0x300000003
+mtime = Tue Nov 10 10:56:07 UTC 2026
+pZxid = 0x300000003
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x200000a87b40000
+dataLength = 7
+numChildren = 0
+$ docker exec zk2 pkill -9 -f ZooKeeperMain
+$ while docker exec zk1 zkCli.sh -server zk1:2181 ls / | grep -q lab4-ephemeral; do date +%T; sleep 2; done
+13:56:13
+13:56:16
+13:56:19
+13:56:21
+13:56:24
+13:56:26
+13:56:29
+13:56:32
+13:56:34
+13:56:37
+13:56:39
+node_gone_after_seconds=29
+$ docker exec zk1 zkCli.sh -server zk1:2181 ls /
+Connecting to zk1:2181
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null zxid: -1
+[quorum-check, zookeeper]
+$ docker exec zk1 zkCli.sh -server zk1:2181 get /lab4-ephemeral
+Connecting to zk1:2181
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null zxid: -1
+Node does not exist: /lab4-ephemeral
+Exiting JVM with code 1

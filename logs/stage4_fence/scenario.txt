@@ -1,0 +1,12 @@
+$ .venv/bin/python scripts/scenario.py stage4_fence 1
+2026-11-10 14:00:02.860 scenario сброс состояния /lab4 эпоха=0 чекпоинт пустой указатель версия=0
+2026-11-10 14:00:02.862 scenario запустил coord-a pid=59753 FENCING=1
+2026-11-10 14:00:03.078 scenario запустил coord-b pid=59757 FENCING=1
+2026-11-10 14:00:05.109 scenario приостановил лидера coord-a SIGSTOP чекпоинт готово=8
+2026-11-10 14:00:45.109 scenario возобновил coord-a SIGCONT пауза=40.0с
+2026-11-10 14:00:49.677 scenario смена лидера через 11.08с от паузы coord-a до строки стал лидером у coord-b
+2026-11-10 14:00:49.677 scenario coord-a строк записал_результат=0 BadVersionError=1
+2026-11-10 14:00:49.678 scenario coord-b строк записал_результат=1 BadVersionError=0
+2026-11-10 14:00:49.679 scenario указатель /lab4/result версия=1 данные={"result": "s3://zk-lab/stage4_fence/result-coord-b-epoch2.csv", "coordinator": "coord-b", "epoch": 2}
+2026-11-10 14:00:49.687 scenario ДЗ 3 s3://hh-lake/results/mapreduce/skills_k2.csv строк=12308 sha256=2fbb0cb56c472f16
+2026-11-10 14:00:49.696 scenario результат s3://zk-lab/stage4_fence/result-coord-b-epoch2.csv строк=12308 sha256=2fbb0cb56c472f16 совпадает_с_ДЗ_3=True

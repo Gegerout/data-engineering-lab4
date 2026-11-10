@@ -1,0 +1,70 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[a4paper, mag=1000, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm, headsep=0.7cm, footskip=1cm]{geometry}
+\usepackage{iftex}
+\ifXeTeX
+  % XeLaTeX / Tectonic: Computer Modern Unicode (тот же вид, что и T2A в pdfLaTeX)
+  \usepackage{fontspec}
+  \setmainfont{cmunrm.otf}[BoldFont=cmunbx.otf, ItalicFont=cmunti.otf, BoldItalicFont=cmunbi.otf]
+  \setsansfont{cmunss.otf}[BoldFont=cmunsx.otf, ItalicFont=cmunsi.otf, BoldItalicFont=cmunso.otf]
+  \setmonofont{cmuntt.otf}[BoldFont=cmuntb.otf, ItalicFont=cmunit.otf, BoldItalicFont=cmuntx.otf]
+\else
+  \usepackage[T2A]{fontenc}
+  \usepackage[utf8]{inputenc}
+\fi
+\usepackage[english,russian]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{fvextra}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\DefineVerbatimEnvironment{code}{Verbatim}{fontsize=\small,breaklines=true,breakanywhere=true,breaksymbolleft={}}
+
+\captionsetup{labelsep=period}
+
+\titleformat{\section}{\Large\bfseries\centering}{}{0em}{}
+\renewcommand{\thesection}{}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+    {\Large\textbf{ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ}}\\
+    {\Large\textbf{«НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИТМО»}}\\[5mm]
+    {\large\text{ФАКУЛЬТЕТ ТЕХНОЛОГИЙ ИСКУССТВЕННОГО ИНТЕЛЛЕКТА}}\\[5mm]
+    \includegraphics[scale=0.14]{logo.png}\\[20mm]
+    \rule{\textwidth}{0.4mm}\\[3mm]
+    {\Large\text{Лабораторная работа №4}}\\[3mm]
+    {\Large\text{по дисциплине «Инженерия данных»}}\\[3mm]
+    \rule{\textwidth}{0.4mm}
+\end{center}
+
+\vfill
+
+\begin{flushright}
+    \large Выполнил: \\[2mm]
+    Студент группы J3311 \\
+    Поладов Селим Бегенджович \\
+    ИСУ: 467128
+\end{flushright}
+
+\vfill
+
+\begin{center}
+    \large Санкт-Петербург \\
+    \large 2026
+\end{center}
+
+\newpage
+
+\titleformat{\section}{\Large\bfseries\raggedright}{}{0em}{}
+\titleformat{\subsection}{\large\bfseries\raggedright}{}{0em}{}
+\titlespacing*{\section}{0pt}{10pt}{6pt}
+\titlespacing*{\subsection}{0pt}{8pt}{3pt}
+
+\input{work}
+
+\end{document}

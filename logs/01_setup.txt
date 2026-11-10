@@ -1,0 +1,67 @@
+$ docker pull zookeeper:3.9.6-jre-17
+3.9.6-jre-17: Pulling from library/zookeeper
+Digest: sha256:bbf678337a9242fcb6e49e51193855078ec515251cf11fe0bcfabae6a10e040a
+Status: Image is up to date for zookeeper:3.9.6-jre-17
+docker.io/library/zookeeper:3.9.6-jre-17
+$ cat conf/zk1/zoo.cfg
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/data/zk1
+clientPort=2181
+admin.enableServer=false
+4lw.commands.whitelist=srvr,ruok
+server.1=zk1:2888:3888
+server.2=zk2:2889:3889
+server.3=zk3:2890:3890
+$ cat conf/zk2/zoo.cfg
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/data/zk2
+clientPort=2182
+admin.enableServer=false
+4lw.commands.whitelist=srvr,ruok
+server.1=zk1:2888:3888
+server.2=zk2:2889:3889
+server.3=zk3:2890:3890
+$ cat conf/zk3/zoo.cfg
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/data/zk3
+clientPort=2183
+admin.enableServer=false
+4lw.commands.whitelist=srvr,ruok
+server.1=zk1:2888:3888
+server.2=zk2:2889:3889
+server.3=zk3:2890:3890
+$ cat data/zk1/myid data/zk2/myid data/zk3/myid
+1
+2
+3
+$ docker compose up -d
+ Network zk-lab_default  Creating
+ Network zk-lab_default  Created
+ Container zk1  Creating
+ Container zk3  Creating
+ Container zk2  Creating
+ Container zk1  Created
+ Container zk3  Created
+ Container zk2  Created
+ Container zk1  Starting
+ Container zk2  Starting
+ Container zk3  Starting
+ Container zk1  Started
+ Container zk3  Started
+ Container zk2  Started
+$ docker inspect --format '{{.Name}} {{.Config.Cmd}}' zk1 zk2 zk3
+/zk1 [zkServer.sh start-foreground]
+/zk2 [zkServer.sh start-foreground]
+/zk3 [zkServer.sh start-foreground]
+$ docker exec zk1 printenv JAVA_HOME
+/opt/java/openjdk
+$ docker exec zk1 java -version
+openjdk version "17.0.21" 2026-10-20
+OpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)
+OpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)

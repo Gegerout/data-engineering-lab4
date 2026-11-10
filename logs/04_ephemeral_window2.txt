@@ -1,0 +1,9 @@
+Connecting to zk2:2182
+Welcome to ZooKeeper!
+JLine support is enabled
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null zxid: -1
+[zk: zk2:2182(CONNECTED) 0] Created /lab4-ephemeral
+[zk: zk2:2182(CONNECTED) 1] /apache-zookeeper-3.9.6-bin/bin/zkCli.sh: line 43:   492 Killed                  "$JAVA" "-Dzookeeper.log.dir=${ZOO_LOG_DIR}" "-Dzookeeper.log.file=${ZOO_LOG_FILE}" -cp "$CLASSPATH" $CLIENT_JVMFLAGS $JVMFLAGS org.apache.zookeeper.ZooKeeperMain "$@"

@@ -1,0 +1,4 @@
+$ docker exec zk1 ls -d /apache-zookeeper-3.9.6-bin
+/apache-zookeeper-3.9.6-bin
+$ docker exec -e CLIENT_JVMFLAGS= zk1 zkCli.sh -server zk1:2181 ls / | grep -o "negotiated timeout = [0-9]*"
+negotiated timeout = 30000

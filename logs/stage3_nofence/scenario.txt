@@ -1,0 +1,13 @@
+$ .venv/bin/python scripts/scenario.py stage3_nofence 0
+2026-11-10 13:59:14.677 scenario сброс состояния /lab4 эпоха=0 чекпоинт пустой указатель версия=0
+2026-11-10 13:59:14.679 scenario запустил coord-a pid=58904 FENCING=0
+2026-11-10 13:59:14.887 scenario запустил coord-b pid=58905 FENCING=0
+2026-11-10 13:59:16.925 scenario приостановил лидера coord-a SIGSTOP чекпоинт готово=8
+2026-11-10 13:59:56.930 scenario возобновил coord-a SIGCONT пауза=40.0с
+2026-11-10 14:00:01.985 scenario смена лидера через 11.26с от паузы coord-a до строки стал лидером у coord-b
+2026-11-10 14:00:01.985 scenario coord-a строк записал_результат=1 BadVersionError=0
+2026-11-10 14:00:01.985 scenario coord-b строк записал_результат=1 BadVersionError=0
+2026-11-10 14:00:01.987 scenario указатель /lab4/result версия=2 данные={"result": "s3://zk-lab/stage3_nofence/result-coord-a-epoch1.csv", "coordinator": "coord-a", "epoch": 1}
+2026-11-10 14:00:01.995 scenario ДЗ 3 s3://hh-lake/results/mapreduce/skills_k2.csv строк=12308 sha256=2fbb0cb56c472f16
+2026-11-10 14:00:02.006 scenario результат s3://zk-lab/stage3_nofence/result-coord-a-epoch1.csv строк=12308 sha256=2fbb0cb56c472f16 совпадает_с_ДЗ_3=True
+2026-11-10 14:00:02.012 scenario результат s3://zk-lab/stage3_nofence/result-coord-b-epoch2.csv строк=12308 sha256=2fbb0cb56c472f16 совпадает_с_ДЗ_3=True

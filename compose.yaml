@@ -1,0 +1,27 @@
+# Три сервера ZooKeeper 3.9.6 с Java 17. У каждого свой zoo.cfg, свой клиентский порт и своя папка dataDir с файлом myid.
+name: zk-lab
+x-zk: &zk
+  image: zookeeper:3.9.6-jre-17
+  restart: "no"
+  command: ["zkServer.sh", "start-foreground"]
+  environment:
+    CLIENT_JVMFLAGS: "-Dlogback.configurationFile=/conf/logback-cli.xml"
+services:
+  zk1:
+    <<: *zk
+    container_name: zk1
+    hostname: zk1
+    ports: ["127.0.0.1:2181:2181"]
+    volumes: ["./conf/zk1/zoo.cfg:/conf/zoo.cfg:ro", "./conf/logback-cli.xml:/conf/logback-cli.xml:ro", "./data/zk1:/data/zk1"]
+  zk2:
+    <<: *zk
+    container_name: zk2
+    hostname: zk2
+    ports: ["127.0.0.1:2182:2182"]
+    volumes: ["./conf/zk2/zoo.cfg:/conf/zoo.cfg:ro", "./conf/logback-cli.xml:/conf/logback-cli.xml:ro", "./data/zk2:/data/zk2"]
+  zk3:
+    <<: *zk
+    container_name: zk3
+    hostname: zk3
+    ports: ["127.0.0.1:2183:2183"]
+    volumes: ["./conf/zk3/zoo.cfg:/conf/zoo.cfg:ro", "./conf/logback-cli.xml:/conf/logback-cli.xml:ro", "./data/zk3:/data/zk3"]

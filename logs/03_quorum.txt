@@ -1,0 +1,68 @@
+leader=zk3
+$ docker stop zk3
+zk3
+$ sleep 5
+$ docker exec zk1 zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /conf/zoo.cfg
+Client port found: 2181. Client address: localhost. Client SSL: false.
+Mode: follower
+$ docker exec zk2 zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /conf/zoo.cfg
+Client port found: 2182. Client address: localhost. Client SSL: false.
+Mode: leader
+$ docker exec zk1 zkCli.sh -server zk1:2181 create /quorum-check one-server-down
+Connecting to zk1:2181
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null zxid: -1
+Created /quorum-check
+$ docker exec zk2 zkCli.sh -server zk2:2182 get /quorum-check
+Connecting to zk2:2182
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null zxid: -1
+one-server-down
+$ docker stop zk1
+zk1
+$ sleep 5
+$ docker exec zk2 zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /conf/zoo.cfg
+Client port found: 2182. Client address: localhost. Client SSL: false.
+Error contacting service. It is probably not running.
+$ docker exec zk2 bash -c 'echo srvr | nc -w 2 localhost 2182'
+This ZooKeeper instance is not currently serving requests
+$ docker exec zk2 timeout 30 zkCli.sh -server zk2:2182 ls /
+Connecting to zk2:2182
+KeeperErrorCode = ConnectionLoss for /
+Exiting JVM with code 1
+$ docker start zk3 zk1
+zk3
+zk1
+$ sleep 10
+$ docker exec zk1 zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /conf/zoo.cfg
+Client port found: 2181. Client address: localhost. Client SSL: false.
+Mode: follower
+$ docker exec zk2 zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /conf/zoo.cfg
+Client port found: 2182. Client address: localhost. Client SSL: false.
+Mode: leader
+$ docker exec zk3 zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /conf/zoo.cfg
+Client port found: 2183. Client address: localhost. Client SSL: false.
+Mode: follower
+$ docker exec zk1 zkCli.sh -server zk1:2181 get /quorum-check
+Connecting to zk1:2181
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null zxid: -1
+one-server-down
